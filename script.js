@@ -53,14 +53,9 @@ const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not yet read');
 const hp = new Book('Harry Potter', 'J.K. Rowling', 635, 'has been read');
 const pokemon = new Book('Pokemon', '‎Satoshi Tajiri‎', 122, 'has been read');
 
-// pushBookToLibraryArray(hobbit);
+pushBookToLibraryArray(hobbit);
 // pushBookToLibraryArray(hp);
 // pushBookToLibraryArray(pokemon);
-
-
-title = document.querySelector('#title');
-author = document.querySelector('#author');
-pages = document.querySelector('#pages');
 
 
 
@@ -73,3 +68,10 @@ pages = document.querySelector('#pages');
 // TODO: when delete is pressed, the book card disappears
 // TODO: when form is filled in and add book is clicked, new card appears
 // TODO: form becomes empty after add book is clicked
+
+const myForm = document.querySelector("form");
+
+const newBookBtn = document.querySelector(".new-book");
+newBookBtn.addEventListener("click", () => {
+    myForm.style.display = "block";
+});
