@@ -12,6 +12,7 @@ function Book(title, author, pages, isRead) {
 
 function pushBookToLibraryArray(myBook) {
     myLibrary.push(myBook);
+    render();
 }
 
 function render() {
@@ -44,6 +45,7 @@ function render() {
 
         const del = document.createElement('button');
         del.textContent = 'Delete';
+        del.className = 'delete-btn';
         card.appendChild(del);
     });
 
@@ -74,4 +76,12 @@ const myForm = document.querySelector("form");
 const newBookBtn = document.querySelector(".new-book");
 newBookBtn.addEventListener("click", () => {
     myForm.style.display = "block";
+});
+
+const deleteBtn = document.querySelectorAll(".delete-btn");
+deleteBtn.forEach(element => {
+    element.addEventListener("click", () => {
+        myLibrary = [];
+        render();
+    })
 });
