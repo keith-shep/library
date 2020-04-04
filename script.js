@@ -59,8 +59,6 @@ pushBookToLibraryArray(hobbit);
 // pushBookToLibraryArray(hp);
 // pushBookToLibraryArray(pokemon);
 
-
-
 // DONE: design card in CSS
 // DONE: add 'New book' button
 // DONE: add 'Delete' button on each book
@@ -84,4 +82,12 @@ deleteBtn.forEach(element => {
         myLibrary = [];
         render();
     })
+});
+
+const addBook = document.querySelector("#add-book");
+addBook.addEventListener("click", (e) => {
+    e.preventDefault();
+    bookToAdd = new Book(title.value, author.value, pages.value,'read');
+    myLibrary.push(bookToAdd);
+    render();
 });
