@@ -22,30 +22,36 @@ function render() {
         bookshelf.removeChild(bookshelf.firstChild);
     }
 
-    myLibrary.map((item) => {
+    myLibrary.map((item, index) => {
         const card = document.createElement('div');
         card.className = 'card';
         bookshelf.appendChild(card);
 
+        card.dataset.index = index;
+        
         const title = document.createElement('h1');
         title.textContent = item.title;
         card.appendChild(title);
-
+        
         const author = document.createElement('p');
         author.textContent = item.author;
         card.appendChild(author);
-
+        
         const pages = document.createElement('p');
         pages.textContent = item.pages + ' pages';
         card.appendChild(pages);
-
+        
         const markAsRead = document.createElement('button');
         markAsRead.textContent = 'Mark as Read';
         card.appendChild(markAsRead);
-
+        
         const del = document.createElement('button');
         del.textContent = 'Delete';
         del.className = 'delete-btn';
+        del.addEventListener("click", () => {
+            myLibrary.splice(index, 1)
+            render();
+        });
         card.appendChild(del);
     });
 
@@ -56,18 +62,6 @@ const hp = new Book('Harry Potter', 'J.K. Rowling', 635, 'has been read');
 const pokemon = new Book('Pokemon', '‎Satoshi Tajiri‎', 122, 'has been read');
 
 pushBookToLibraryArray(hobbit);
-// pushBookToLibraryArray(hp);
-// pushBookToLibraryArray(pokemon);
-
-// DONE: design card in CSS
-// DONE: add 'New book' button
-// DONE: add 'Delete' button on each book
-// DONE: add form to receive book details
-
-// TODO: after pressing new book, make the modal form appear
-// TODO: when delete is pressed, the book card disappears
-// TODO: when form is filled in and add book is clicked, new card appears
-// TODO: form becomes empty after add book is clicked
 
 const myForm = document.querySelector("form");
 
@@ -76,18 +70,25 @@ newBookBtn.addEventListener("click", () => {
     myForm.style.display = "block";
 });
 
-const deleteBtn = document.querySelectorAll(".delete-btn");
-deleteBtn.forEach(element => {
-    element.addEventListener("click", () => {
-        myLibrary = [];
-        render();
-    })
-});
-
 const addBook = document.querySelector("#add-book");
 addBook.addEventListener("click", (e) => {
     e.preventDefault();
     bookToAdd = new Book(title.value, author.value, pages.value,'read');
     myLibrary.push(bookToAdd);
     render();
+    myForm.style.display = "none";
+    title.value = "";
+    author.value = "";
+    pages.value = "";
 });
+
+// DONE: design card in CSS
+// DONE: add 'New book' button
+// DONE: add 'Delete' button on each book
+// DONE: add form to receive book details
+// DONE: when form is filled in and add book is clicked, new card appears
+// DONE: form becomes empty after add book is clicked
+// DONE: when delete is pressed, the book card disappears
+
+// TODO: after pressing new book, make the modal form appear
+// TODO: prevent form from submitted if there are uncompleted fields
