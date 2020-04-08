@@ -26,7 +26,6 @@ function render() {
         const card = document.createElement('div');
         card.className = 'card';
         bookshelf.appendChild(card);
-
         card.dataset.index = index;
         
         const title = document.createElement('h1');
@@ -41,9 +40,25 @@ function render() {
         pages.textContent = item.pages + ' pages';
         card.appendChild(pages);
         
-        const markAsRead = document.createElement('button');
-        markAsRead.textContent = 'Mark as Read';
-        card.appendChild(markAsRead);
+        const readStatus = document.createElement('p');
+        if (item.isRead) {
+            readStatus.textContent = "I've read this!";
+        } else {
+            readStatus.textContent = "Not yet read...";
+        }
+        card.appendChild(readStatus);
+
+        const readToggleBtn = document.createElement('button');
+        readToggleBtn.textContent = 'Change Read Status';
+        readToggleBtn.addEventListener("click", () =>{
+            console.log(item.isRead = !item.isRead);
+            render();
+        });
+
+        card.appendChild(readToggleBtn);
+
+        
+
         
         const del = document.createElement('button');
         del.textContent = 'Delete';
@@ -57,11 +72,15 @@ function render() {
 
 }
 
-const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not yet read');
-const hp = new Book('Harry Potter', 'J.K. Rowling', 635, 'has been read');
-const pokemon = new Book('Pokemon', '‎Satoshi Tajiri‎', 122, 'has been read');
+const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
+const hp = new Book('Harry Potter', 'J.K. Rowling', 635, true);
+const pokemon = new Book('Pokemon', '‎Satoshi Tajiri‎', 122, true);
 
 pushBookToLibraryArray(hobbit);
+pushBookToLibraryArray(hp);
+pushBookToLibraryArray(pokemon);
+
+
 
 const myForm = document.querySelector("form");
 
@@ -89,6 +108,7 @@ addBook.addEventListener("click", (e) => {
 // DONE: when form is filled in and add book is clicked, new card appears
 // DONE: form becomes empty after add book is clicked
 // DONE: when delete is pressed, the book card disappears
+// DONE: add mark as read implementation
 
 // TODO: after pressing new book, make the modal form appear
 // TODO: prevent form from submitted if there are uncompleted fields
