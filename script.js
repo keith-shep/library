@@ -51,14 +51,11 @@ function render() {
         const readToggleBtn = document.createElement('button');
         readToggleBtn.textContent = 'Change Read Status';
         readToggleBtn.addEventListener("click", () =>{
-            console.log(item.isRead = !item.isRead);
+            item.isRead = !item.isRead;
             render();
         });
 
         card.appendChild(readToggleBtn);
-
-        
-
         
         const del = document.createElement('button');
         del.textContent = 'Delete';
@@ -69,7 +66,6 @@ function render() {
         });
         card.appendChild(del);
     });
-
 }
 
 const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
@@ -79,8 +75,6 @@ const pokemon = new Book('Pokemon', '‎Satoshi Tajiri‎', 122, true);
 pushBookToLibraryArray(hobbit);
 pushBookToLibraryArray(hp);
 pushBookToLibraryArray(pokemon);
-
-
 
 const myForm = document.querySelector("form");
 
@@ -92,7 +86,10 @@ newBookBtn.addEventListener("click", () => {
 const addBook = document.querySelector("#add-book");
 addBook.addEventListener("click", (e) => {
     e.preventDefault();
-    bookToAdd = new Book(title.value, author.value, pages.value,'read');
+    
+    const forms = document.querySelector('#read');
+    bookToAdd = new Book(title.value, author.value, pages.value, forms.checked);
+
     myLibrary.push(bookToAdd);
     render();
     myForm.style.display = "none";
@@ -109,6 +106,7 @@ addBook.addEventListener("click", (e) => {
 // DONE: form becomes empty after add book is clicked
 // DONE: when delete is pressed, the book card disappears
 // DONE: add mark as read implementation
+// DONE: add read functionality when adding new book
 
 // TODO: after pressing new book, make the modal form appear
 // TODO: prevent form from submitted if there are uncompleted fields
