@@ -86,7 +86,12 @@ newBookBtn.addEventListener("click", () => {
 const addBook = document.querySelector("#add-book");
 addBook.addEventListener("click", (e) => {
     e.preventDefault();
-    
+
+    if (title.value == 0 || author.value == 0 || pages.value ==0) {
+        alert("Please fill in all fields.");
+        return 0;
+    }
+
     const forms = document.querySelector('#read');
     bookToAdd = new Book(title.value, author.value, pages.value, forms.checked);
 
@@ -107,6 +112,6 @@ addBook.addEventListener("click", (e) => {
 // DONE: when delete is pressed, the book card disappears
 // DONE: add mark as read implementation
 // DONE: add read functionality when adding new book
+// DONE: prevent form from submitted if there are uncompleted fields
 
 // TODO: after pressing new book, make the modal form appear
-// TODO: prevent form from submitted if there are uncompleted fields
